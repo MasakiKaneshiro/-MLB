@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Post;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostController extends Controllers
+class PostController extends Controller
 {
-    public function index(post $post)
+    public function index(Post $post)
     {
-        return $post->get();
+        return view('posts.index')->with(['posts' => $post->getByLimit()]);
     }
-     
-}
+    
+    public function show(Post $post)
+    {
+        dd($post);
+        return view('posts.show')->with(['post' => $post]);
+    }  
+}    
